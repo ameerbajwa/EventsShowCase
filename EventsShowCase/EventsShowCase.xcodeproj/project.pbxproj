@@ -16,6 +16,8 @@
 		DEC9931A2602ECA400A42CF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC993182602ECA400A42CF4 /* LaunchScreen.storyboard */; };
 		DEC993252602ECA400A42CF4 /* EventsShowCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC993242602ECA400A42CF4 /* EventsShowCaseTests.swift */; };
 		DEC993302602ECA400A42CF4 /* EventsShowCaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9932F2602ECA400A42CF4 /* EventsShowCaseUITests.swift */; };
+		DEC9933E2602F57B00A42CF4 /* RestAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9933D2602F57B00A42CF4 /* RestAPIManager.swift */; };
+		DEC993402602F5AA00A42CF4 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9933F2602F5AA00A42CF4 /* EventService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		DEC9932B2602ECA400A42CF4 /* EventsShowCaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventsShowCaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC9932F2602ECA400A42CF4 /* EventsShowCaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsShowCaseUITests.swift; sourceTree = "<group>"; };
 		DEC993312602ECA400A42CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEC9933D2602F57B00A42CF4 /* RestAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPIManager.swift; sourceTree = "<group>"; };
+		DEC9933F2602F5AA00A42CF4 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 			children = (
 				DEC9930A2602EC9600A42CF4 /* AppDelegate.swift */,
 				DEC9930C2602EC9600A42CF4 /* SceneDelegate.swift */,
+				DEC9933D2602F57B00A42CF4 /* RestAPIManager.swift */,
+				DEC9933F2602F5AA00A42CF4 /* EventService.swift */,
 				DEC9930E2602EC9600A42CF4 /* ViewController.swift */,
 				DEC993102602EC9600A42CF4 /* Main.storyboard */,
 				DEC993162602ECA400A42CF4 /* Assets.xcassets */,
@@ -262,6 +268,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEC993402602F5AA00A42CF4 /* EventService.swift in Sources */,
+				DEC9933E2602F57B00A42CF4 /* RestAPIManager.swift in Sources */,
 				DEC9930F2602EC9600A42CF4 /* ViewController.swift in Sources */,
 				DEC993152602EC9600A42CF4 /* EventsShowCase.xcdatamodeld in Sources */,
 				DEC9930B2602EC9600A42CF4 /* AppDelegate.swift in Sources */,
@@ -377,6 +385,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -430,6 +439,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

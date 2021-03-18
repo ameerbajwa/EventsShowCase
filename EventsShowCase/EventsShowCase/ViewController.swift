@@ -9,10 +9,23 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    let eventService = EventService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+//        eventService.getEvents(onSuccess: { (response) in
+//            print("success")
+//        }) { (error) in
+//            print("error")
+//        }
+        
+        eventService.getEvent(eventId: "5370958", onSuccess: { (response) in
+            print("success")
+        }) { (error) in
+            print("error")
+        }
     }
 
 
