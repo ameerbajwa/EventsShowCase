@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let eventService = EventService()
+    var event: Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +24,21 @@ class ViewController: UIViewController {
         
         eventService.getEvent(eventId: "5370958", onSuccess: { (response) in
             print("success")
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            do {
+                self.event = try decoder.decode(Event.self, from: response)
+                print(self.event?.title)
+                print(self.event?.datetimeLocal)
+                print(self.event?.venue.displayLocation)
+                print(self.event?.performers[0].image)
+            } catch {
+                print("unexpected error: \(error).")
+            }
         }) { (error) in
             print("error")
         }
     }
-
 
 }
 

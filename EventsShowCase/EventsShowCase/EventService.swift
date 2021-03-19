@@ -12,7 +12,7 @@ class EventService {
     
     let restAPIManager = RestAPIManager()
     
-    func getEvents(onSuccess: @escaping ([String:Any]) -> Void, onFailure: @escaping ([String: Any]) -> Void) {
+    func getEvents(onSuccess: @escaping (Data) -> Void, onFailure: @escaping ([String: Any]) -> Void) {
         let apiUrl = "/events"
         
         restAPIManager.httpRequest(apiUrl: apiUrl, httpMethod: "GET",
@@ -24,7 +24,7 @@ class EventService {
                 })
     }
     
-    func getEvent(eventId: String, onSuccess: @escaping ([String:Any]) -> Void, onFailure: @escaping ([String: Any]) -> Void) {
+    func getEvent(eventId: String, onSuccess: @escaping (Data) -> Void, onFailure: @escaping ([String: Any]) -> Void) {
         let apiUrl = "/events/\(eventId)"
         
         restAPIManager.httpRequest(apiUrl: apiUrl, httpMethod: "GET",

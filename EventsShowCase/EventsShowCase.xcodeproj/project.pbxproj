@@ -18,6 +18,7 @@
 		DEC993302602ECA400A42CF4 /* EventsShowCaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9932F2602ECA400A42CF4 /* EventsShowCaseUITests.swift */; };
 		DEC9933E2602F57B00A42CF4 /* RestAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9933D2602F57B00A42CF4 /* RestAPIManager.swift */; };
 		DEC993402602F5AA00A42CF4 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9933F2602F5AA00A42CF4 /* EventService.swift */; };
+		DEC993422604266200A42CF4 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC993412604266200A42CF4 /* EventModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		DEC993312602ECA400A42CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEC9933D2602F57B00A42CF4 /* RestAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPIManager.swift; sourceTree = "<group>"; };
 		DEC9933F2602F5AA00A42CF4 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
+		DEC993412604266200A42CF4 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				DEC9930C2602EC9600A42CF4 /* SceneDelegate.swift */,
 				DEC9933D2602F57B00A42CF4 /* RestAPIManager.swift */,
 				DEC9933F2602F5AA00A42CF4 /* EventService.swift */,
+				DEC993412604266200A42CF4 /* EventModel.swift */,
 				DEC9930E2602EC9600A42CF4 /* ViewController.swift */,
 				DEC993102602EC9600A42CF4 /* Main.storyboard */,
 				DEC993162602ECA400A42CF4 /* Assets.xcassets */,
@@ -272,6 +275,7 @@
 				DEC9933E2602F57B00A42CF4 /* RestAPIManager.swift in Sources */,
 				DEC9930F2602EC9600A42CF4 /* ViewController.swift in Sources */,
 				DEC993152602EC9600A42CF4 /* EventsShowCase.xcdatamodeld in Sources */,
+				DEC993422604266200A42CF4 /* EventModel.swift in Sources */,
 				DEC9930B2602EC9600A42CF4 /* AppDelegate.swift in Sources */,
 				DEC9930D2602EC9600A42CF4 /* SceneDelegate.swift in Sources */,
 			);
