@@ -9,6 +9,12 @@
 import UIKit
 
 class EventListCell: UITableViewCell {
+    
+    var eventViewModel: EventViewModel! {
+        didSet {
+            textLabel?.text = eventViewModel.name
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
