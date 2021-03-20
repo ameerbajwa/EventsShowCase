@@ -8,6 +8,10 @@
 
 import Foundation
 
+class EventList: Decodable {
+    var events: [Event]
+}
+
 class Event: Decodable {
     var type: String
     var id: Int
