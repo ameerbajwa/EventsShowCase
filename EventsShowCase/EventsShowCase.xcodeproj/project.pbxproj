@@ -21,7 +21,6 @@
 		DEC993402602F5AA00A42CF4 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9933F2602F5AA00A42CF4 /* EventService.swift */; };
 		DEC993422604266200A42CF4 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC993412604266200A42CF4 /* EventModel.swift */; };
 		DEC9934B26065B1E00A42CF4 /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9934926065B1D00A42CF4 /* EventListCell.swift */; };
-		DEC9934C26065B1E00A42CF4 /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEC9934A26065B1D00A42CF4 /* EventListCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +61,6 @@
 		DEC9933F2602F5AA00A42CF4 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		DEC993412604266200A42CF4 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		DEC9934926065B1D00A42CF4 /* EventListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
-		DEC9934A26065B1D00A42CF4 /* EventListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,7 +182,6 @@
 			children = (
 				DEC993102602EC9600A42CF4 /* Main.storyboard */,
 				DEC9934926065B1D00A42CF4 /* EventListCell.swift */,
-				DEC9934A26065B1D00A42CF4 /* EventListCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,7 +290,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEC9934C26065B1E00A42CF4 /* EventListCell.xib in Resources */,
 				DEC9931A2602ECA400A42CF4 /* LaunchScreen.storyboard in Resources */,
 				DEC993172602ECA400A42CF4 /* Assets.xcassets in Resources */,
 				DEC993122602EC9600A42CF4 /* Main.storyboard in Resources */,

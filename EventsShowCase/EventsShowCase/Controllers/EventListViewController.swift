@@ -18,11 +18,11 @@ class EventListViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
+        setUpTableView()
         getEventListAPICall()
     }
     
-    override func loadView() {
-        super.loadView()
+    func setUpTableView() {
         eventListTableView.delegate = self
         eventListTableView.dataSource = self
         
@@ -33,6 +33,9 @@ class EventListViewController: UIViewController {
         eventListTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         eventListTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
+        eventListTableView.rowHeight = UITableView.automaticDimension
+        eventListTableView.estimatedRowHeight = 200
+        eventListTableView.register(EventListCell.self, forCellReuseIdentifier: "eventListCell")
     }
     
     func getEventListAPICall() {
@@ -60,9 +63,9 @@ extension EventListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "test"
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "eventListCell", for: indexPath) as? EventListCell
+        cell?.eventViewModel = eventsViewModel[indexPath.row]
+        return cell!
     }
     
 }

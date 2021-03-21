@@ -13,12 +13,14 @@ struct EventViewModel {
     var id: Int
     var name: String
     var location: String
+    var time: String
     
     // Dependency Injection
     init(event: Event) {
         self.id = event.id
         self.name = event.title
         self.location = event.venue.displayLocation
+        self.time = event.datetimeUtc
     }
 
 }
