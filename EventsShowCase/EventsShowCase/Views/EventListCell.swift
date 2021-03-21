@@ -18,7 +18,7 @@ class EventListCell: UITableViewCell {
         didSet {
             eventName.text = eventViewModel.name
             eventLocation.text = eventViewModel.location
-            eventTime.text = eventViewModel.time
+            eventTime.text = eventViewModel.formattedTime(eventTime: eventViewModel.time)
         }
     }
     
@@ -27,6 +27,7 @@ class EventListCell: UITableViewCell {
         setUpEventNameLabel()
         setUpEventLocationLabel()
         setUpEventTimeLabel()
+        accessoryType = .disclosureIndicator
     }
     
     func setUpEventNameLabel() {
@@ -56,7 +57,7 @@ class EventListCell: UITableViewCell {
         eventTime.font = UIFont.systemFont(ofSize: 16)
         eventTime.textColor = UIColor.black
         
-        addSubview(eventTime)      
+        addSubview(eventTime)
         eventTime.translatesAutoresizingMaskIntoConstraints = false
         eventTime.topAnchor.constraint(equalTo: eventLocation.bottomAnchor, constant: 10.0).isActive = true
         eventTime.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20.0).isActive = true

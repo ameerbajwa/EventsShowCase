@@ -10,6 +10,8 @@ import Foundation
 
 struct EventViewModel {
     
+    var date = Date()
+    
     var id: Int
     var name: String
     var location: String
@@ -22,5 +24,13 @@ struct EventViewModel {
         self.location = event.venue.displayLocation
         self.time = event.datetimeUtc
     }
-
+    
+    mutating func formattedTime(eventTime: String) -> String {
+        print(eventTime)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        date = dateFormatter.date(from: eventTime) ?? Date(timeInterval: -1000000, since: Date())
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy h:mm a"
+        return dateFormatter.string(from: date)
+    }
 }
