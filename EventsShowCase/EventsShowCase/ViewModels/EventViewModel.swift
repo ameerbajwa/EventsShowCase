@@ -16,7 +16,8 @@ struct EventViewModel {
     var name: String
     var location: String
     var time: String
-    var images: [String]
+    var imageStringUrls: [String]
+    var imagesOfData: Data?
     
     // Dependency Injection
     init(event: Event) {
@@ -24,18 +25,17 @@ struct EventViewModel {
         self.name = event.title
         self.location = event.venue.displayLocation
         self.time = event.datetimeUtc
-        self.images = []
+        self.imageStringUrls = []
         for performer in event.performers {
             if let isPerformerTheHomeTeam = performer.homeTeam {
                 if isPerformerTheHomeTeam {
-                    self.images.append(performer.image)
+                    self.imageStringUrls.append(performer.image)
                 }
             } else {
-                self.images.append(performer.image)
+                self.imageStringUrls.append(performer.image)
             }
-            print(performer.image)
         }
-        
+        self.imagesOfData = nil
     }
     
     mutating func formattedTime(eventTime: String) -> String {
@@ -44,5 +44,12 @@ struct EventViewModel {
         date = dateFormatter.date(from: eventTime) ?? Date(timeInterval: -1000000, since: Date())
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy h:mm a"
         return dateFormatter.string(from: date)
+    }
+    
+    func setImage(stringUrl: String) -> Data? {
+        guard let imageURL = URL(string: stringUrl) else { return nil }
+        guard let imageData = try? Data(contentsOf: imageURL) else { return nil }
+
+        return imageData
     }
 }

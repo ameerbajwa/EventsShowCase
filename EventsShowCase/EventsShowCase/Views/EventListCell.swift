@@ -20,7 +20,8 @@ class EventListCell: UITableViewCell {
             eventName.text = eventViewModel.name
             eventLocation.text = eventViewModel.location
             eventTime.text = eventViewModel.formattedTime(eventTime: eventViewModel.time)
-            eventImageView.image = UIImage(named: eventViewModel.images[0])
+//            eventImageView.image = UIImage(named: eventViewModel.images[0])
+            eventImageView.image = UIImage(data: eventViewModel.setImage(stringUrl: eventViewModel.imageStringUrls[0])!)
         }
     }
     
