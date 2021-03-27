@@ -71,6 +71,7 @@ class EventListCell: UITableViewCell {
     func setUpEventTimeLabel() {
         eventTime.font = UIFont.systemFont(ofSize: 15)
         eventTime.textColor = UIColor.black
+        eventTime.numberOfLines = 0
         
         addSubview(eventTime)
         eventTime.translatesAutoresizingMaskIntoConstraints = false

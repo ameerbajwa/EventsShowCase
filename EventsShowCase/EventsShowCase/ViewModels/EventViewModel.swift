@@ -19,6 +19,8 @@ struct EventViewModel {
     var imageStringUrls: [String]
     var imagesOfData: Data?
     
+    var favorited: Bool?
+    
     // Dependency Injection
     init(event: Event) {
         self.id = event.id
@@ -36,6 +38,7 @@ struct EventViewModel {
             }
         }
         self.imagesOfData = nil
+        self.favorited = event.favorited
     }
     
     mutating func formattedTime(eventTime: String) -> String {

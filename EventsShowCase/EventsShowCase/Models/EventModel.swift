@@ -24,6 +24,8 @@ class Event: Decodable {
     var url: String
     var taxonomies: [Taxonomies]
     var performers: [Performer]
+    
+    var favorited: Bool?
 }
 
 class Venue: Decodable {
