@@ -14,13 +14,13 @@ class EventListCell: UITableViewCell {
     var eventLocation = UILabel()
     var eventTime = UILabel()
     var eventImageView = UIImageView()
+    var eventFavoritedButton = UIButton()
     
     var eventViewModel: EventViewModel! {
         didSet {
             eventName.text = eventViewModel.name
             eventLocation.text = eventViewModel.location
             eventTime.text = eventViewModel.formattedTime(eventTime: eventViewModel.time)
-//            eventImageView.image = UIImage(named: eventViewModel.images[0])
             eventImageView.image = UIImage(data: eventViewModel.setImage(stringUrl: eventViewModel.imageStringUrls[0])!)
         }
     }
@@ -31,6 +31,7 @@ class EventListCell: UITableViewCell {
         setUpEventNameLabel()
         setUpEventLocationLabel()
         setUpEventTimeLabel()
+        setUpEventFavoritedButton()
         accessoryType = .disclosureIndicator
     }
     
@@ -79,6 +80,14 @@ class EventListCell: UITableViewCell {
         eventTime.leadingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: 20.0).isActive = true
         eventTime.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20.0).isActive = true
         eventTime.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20.0).isActive = true
+    }
+    
+    func setUpEventFavoritedButton() {
+        if eventViewModel.favorited == true {
+            eventFavoritedButton.setImage(UIImage(named: "heartFilled"), for: .normal)
+            eventFavoritedButton.frame = CGRect(x: eventImageView.frame.width-15, y: -10, width: 30, height: 30)
+            addSubview(eventFavoritedButton)
+        }
     }
     
     override func awakeFromNib() {

@@ -40,14 +40,14 @@ class EventView: UIView {
     }
     
     func setUpEventNameLabel() {
-        eventName.font = UIFont.boldSystemFont(ofSize: 18)
+        eventName.font = UIFont.boldSystemFont(ofSize: 22)
         eventName.numberOfLines = 0
         
         addSubview(eventName)
         eventName.translatesAutoresizingMaskIntoConstraints = false
         eventName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20.0).isActive = true
-        eventName.topAnchor.constraint(equalTo: topAnchor, constant: 20.0).isActive = true
-        eventName.trailingAnchor.constraint(equalTo: eventFavoritedButton.leadingAnchor, constant: -20.0).isActive = true
+        eventName.topAnchor.constraint(equalTo: topAnchor, constant: 30.0).isActive = true
+//        eventName.trailingAnchor.constraint(equalTo: eventFavoritedButton.leadingAnchor, constant: -20.0).isActive = true
     }
     
     func setupEventFavoritedButton() {
@@ -61,17 +61,18 @@ class EventView: UIView {
     
     func setUpEventImage() {
         eventImageView.layer.cornerRadius = 20.0
+        eventImageView.sizeToFit()
         
         addSubview(eventImageView)
         eventImageView.translatesAutoresizingMaskIntoConstraints = false
-        eventImageView.topAnchor.constraint(equalTo: eventName.bottomAnchor, constant: 20.0).isActive = true
+        eventImageView.topAnchor.constraint(equalTo: eventName.bottomAnchor, constant: 40.0).isActive = true
         eventImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20.0).isActive = true
         eventImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20.0).isActive = true
         eventImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
     }
     
     func setUpEventTimeLabel() {
-        eventTime.font = UIFont.systemFont(ofSize: 15)
+        eventTime.font = UIFont.systemFont(ofSize: 18)
         eventTime.textColor = UIColor.black
         eventTime.numberOfLines = 0
         
@@ -84,7 +85,7 @@ class EventView: UIView {
     }
 
     func setUpEventLocationLabel() {
-        eventLocation.font = UIFont.systemFont(ofSize: 14)
+        eventLocation.font = UIFont.systemFont(ofSize: 16)
         eventLocation.textColor = UIColor.darkGray
         
         addSubview(eventLocation)

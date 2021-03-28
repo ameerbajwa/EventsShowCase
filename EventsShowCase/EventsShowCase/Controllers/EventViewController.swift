@@ -10,20 +10,53 @@ import UIKit
 
 class EventViewController: UIViewController {
     
-    var eventView = UIView()
-
-    override func loadView() {
-        super.loadView()
-        self.eventView = EventView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-        self.view.addSubview(self.eventView)
-    }
+    let eventService = EventService()
+    var eventView = EventView()
+    var selectedEventId: Int?
+    var eventViewModel: EventViewModel?
+    var favoritedEventsDict: [Int:Bool]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getEventAPICall { (eventviewmodel) in
+            DispatchQueue.main.async {
+                self.eventView = EventView.init(frame: CGRect(x: 0, y: self.view.safeAreaLayoutGuide.layoutFrame.origin.y, width: self.view.frame.size.width, height: self.view.frame.size.height))
+                self.eventView.eventViewModel = eventviewmodel
+                self.eventView.eventFavoritedButton.addTarget(self, action: #selector(self.eventFavoritedButtonPressed), for: .touchUpInside)
+                self.view.addSubview(self.eventView)
+            }
+        }
     }
     
+    func getEventAPICall(onSuccess: @escaping (EventViewModel) -> Void) {
+        if let id = selectedEventId {
+            eventService.getEvent(eventId: id, onSuccess: { (response) in
+                print("success")
+                self.eventViewModel = EventViewModel(event: response)
+                onSuccess(self.eventViewModel!)
+            }) { (error) in
+                print("error")
+            }
+        }
+    }
+    
+    @objc func eventFavoritedButtonPressed() {
+        if var evm = self.eventViewModel {
+            evm.favorited = !(evm.favorited!)
+            DispatchQueue.main.async {
+                if evm.favorited == true {
+                    self.eventView.eventFavoritedButton.setImage(UIImage(named: "heartFilled"), for: .normal)
+                } else {
+                    self.eventView.eventFavoritedButton.setImage(UIImage(named: "heartEmpty"), for: .normal)
+                }
+            }
+            
+            eventService.updateCoreData(id: evm.id, favorited: evm.favorited!)
+        }
 
+    }
+    
     /*
     // MARK: - Navigation
 

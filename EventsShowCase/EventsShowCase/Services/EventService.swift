@@ -35,12 +35,21 @@ class EventService {
                 })
     }
     
-    func getEvent(eventId: String, onSuccess: @escaping (Data) -> Void, onFailure: @escaping ([String: Any]) -> Void) {
+    func getEvent(eventId: Int, onSuccess: @escaping (Event) -> Void, onFailure: @escaping ([String: Any]) -> Void) {
         let apiUrl = "/events/\(eventId)"
         
         restAPIManager.httpRequest(apiUrl: apiUrl, httpMethod: "GET",
                 onSuccess: {responseJSON -> Void in
-                    onSuccess(responseJSON)
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let event: Event!
+                    do {
+                        event = try decoder.decode(Event.self, from: responseJSON)
+                        onSuccess(event)
+                    } catch {
+                        print("unexpected error: \(error).")
+                        onFailure(["error":error])
+                    }
                 },
                 onFailure: { responseJSON -> Void in
                     onFailure(responseJSON)
@@ -58,6 +67,23 @@ class EventService {
             onSuccess(favoritedEvents)
         } catch let error as NSError {
             onFailure("Could not fetch. \(error)")
+        }
+    }
+    
+    func updateCoreData(id: Int, favorited: Bool) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "EventFavorited", in: managedContext)!
+        let eventFavorited = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        eventFavorited.setValue(id, forKeyPath: "id")
+        eventFavorited.setValue(favorited, forKeyPath: "favorited")
+        
+        do {
+            try managedContext.save()
+//                self.characters?.append(character)
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
         }
     }
     

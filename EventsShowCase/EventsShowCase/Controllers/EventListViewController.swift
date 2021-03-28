@@ -14,6 +14,7 @@ class EventListViewController: UIViewController {
     let eventService = EventService()
     private var eventsViewModel = [EventViewModel]()
     var filteredEventsViewModel = [EventViewModel]()
+    var selectedEventId: Int = 0
 //    var favoritedEvents: [NSManagedObject]?
     var favoritedEventsDict: [Int:Bool] = [:]
     var eventListTableView = UITableView()
@@ -97,6 +98,14 @@ class EventListViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "selectedEventSegue" {
+            let vc = segue.destination as! EventViewController
+            vc.favoritedEventsDict = favoritedEventsDict
+            vc.selectedEventId = selectedEventId
+        }
+    }
+    
 }
 
 // TABLE VIEW DATA SOURCE FUNCTIONS
@@ -116,7 +125,6 @@ extension EventListViewController: UITableViewDataSource {
         cell?.accessoryType = .disclosureIndicator
         return cell!
     }
-    
 }
 
 // TABLE VIEW DELEGATE FUNCTIONS
@@ -124,6 +132,7 @@ extension EventListViewController: UITableViewDataSource {
 extension EventListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        selectedEventId = filteredEventsViewModel[indexPath.row].id
         self.performSegue(withIdentifier: "selectedEventSegue", sender: nil)
     }
 }

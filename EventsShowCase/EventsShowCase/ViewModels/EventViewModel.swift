@@ -20,9 +20,7 @@ struct EventViewModel {
     var time: String
     var imageStringUrls: [String]
     var imagesOfData: Data?
-    
-    var favoritedEvent: [NSManagedObject]?
-//    var isEventFavorited: [Int: Bool]
+
     var favorited: Bool?
     
     // Dependency Injection
