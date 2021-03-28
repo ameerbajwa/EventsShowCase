@@ -6,7 +6,9 @@
 //  Copyright © 2021 Ameer Bajwa. All rights reserved.
 //
 
+import UIKit
 import Foundation
+import CoreData
 
 struct EventViewModel {
     
@@ -19,6 +21,8 @@ struct EventViewModel {
     var imageStringUrls: [String]
     var imagesOfData: Data?
     
+    var favoritedEvent: [NSManagedObject]?
+//    var isEventFavorited: [Int: Bool]
     var favorited: Bool?
     
     // Dependency Injection
@@ -38,7 +42,7 @@ struct EventViewModel {
             }
         }
         self.imagesOfData = nil
-        self.favorited = event.favorited
+        self.favorited = false
     }
     
     mutating func formattedTime(eventTime: String) -> String {

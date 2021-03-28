@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class EventListViewController: UIViewController {
     
     let eventService = EventService()
     private var eventsViewModel = [EventViewModel]()
     var filteredEventsViewModel = [EventViewModel]()
+//    var favoritedEvents: [NSManagedObject]?
+    var favoritedEventsDict: [Int:Bool] = [:]
     var eventListTableView = UITableView()
     var searchBar = UISearchBar()
     
@@ -27,6 +30,9 @@ class EventListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        favoritedEventsDict = [:]
+        filteredEventsViewModel = []
+        eventsViewModel = []
         getEventListAPICall()
     }
     
@@ -60,19 +66,37 @@ class EventListViewController: UIViewController {
     }
     
     func getEventListAPICall() {
-        eventService.getEvents(onSuccess: { (response) in
-            print("success")
-            let events = response.events
-            self.eventsViewModel = events.map({return EventViewModel(event: $0)})
-            self.filteredEventsViewModel = self.eventsViewModel
-            DispatchQueue.main.async {
-                self.eventListTableView.reloadData()
+        eventService.callCoreData(onSuccess: { (favoritedEvents) in
+            print(favoritedEvents!)
+            if favoritedEvents!.count > 0 {
+                for favoritedEvent in favoritedEvents! {
+                    self.favoritedEventsDict[favoritedEvent.value(forKey: "id") as! Int] = favoritedEvent.value(forKey: "favorited") as? Bool ?? false
+                }
+            }
+            print(self.favoritedEventsDict)
+            self.eventService.getEvents(onSuccess: { (response) in
+                print("success")
+                let events = response.events
+                self.eventsViewModel = events.map({return EventViewModel(event: $0)})
+                if favoritedEvents!.count > 0 {
+                    self.eventsViewModel = self.eventsViewModel.map({ (eventViewModel: EventViewModel) -> EventViewModel in
+                        var newEventViewModel = eventViewModel
+                        newEventViewModel.favorited = self.favoritedEventsDict[eventViewModel.id] ?? false
+                        return newEventViewModel
+                    })
+                }
+                self.filteredEventsViewModel = self.eventsViewModel
+                DispatchQueue.main.async {
+                    self.eventListTableView.reloadData()
+                }
+            }) { (error) in
+                print("error")
             }
         }) { (error) in
-            print("error")
+            print(error)
         }
     }
-
+    
 }
 
 // TABLE VIEW DATA SOURCE FUNCTIONS

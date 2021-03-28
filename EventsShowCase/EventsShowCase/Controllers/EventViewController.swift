@@ -9,11 +9,18 @@
 import UIKit
 
 class EventViewController: UIViewController {
+    
+    var eventView = UIView()
 
+    override func loadView() {
+        super.loadView()
+        self.eventView = EventView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        self.view.addSubview(self.eventView)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
     
 

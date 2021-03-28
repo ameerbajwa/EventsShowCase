@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
 class EventService {
     
@@ -43,6 +45,20 @@ class EventService {
                 onFailure: { responseJSON -> Void in
                     onFailure(responseJSON)
                 })
+    }
+    
+    func callCoreData(onSuccess: @escaping ([NSManagedObject]?) -> Void, onFailure: @escaping (String) -> Void) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "EventFavorited")
+        var favoritedEvents: [NSManagedObject]?
+        
+        do {
+            favoritedEvents = try managedContext.fetch(fetchRequest)
+            onSuccess(favoritedEvents)
+        } catch let error as NSError {
+            onFailure("Could not fetch. \(error)")
+        }
     }
     
 }

@@ -11,6 +11,7 @@
 		488F7FD059F0786F5B080756 /* Pods_EventsShowCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB21DBA209E22D72C9B78F2E /* Pods_EventsShowCase.framework */; };
 		DE68F0002606B87000C5F479 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE68EFFF2606B87000C5F479 /* EventViewModel.swift */; };
 		DE6D8F3E260FC7580082FCD4 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D8F3D260FC7580082FCD4 /* EventViewController.swift */; };
+		DE6D8F4026100B290082FCD4 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D8F3F26100B290082FCD4 /* EventView.swift */; };
 		DEC9930B2602EC9600A42CF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9930A2602EC9600A42CF4 /* AppDelegate.swift */; };
 		DEC9930D2602EC9600A42CF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9930C2602EC9600A42CF4 /* SceneDelegate.swift */; };
 		DEC9930F2602EC9600A42CF4 /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9930E2602EC9600A42CF4 /* EventListViewController.swift */; };
@@ -55,6 +56,7 @@
 		DC1EC7DC4EB869CD8C404129 /* Pods-EventsShowCase-EventsShowCaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsShowCase-EventsShowCaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-EventsShowCase-EventsShowCaseUITests/Pods-EventsShowCase-EventsShowCaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		DE68EFFF2606B87000C5F479 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		DE6D8F3D260FC7580082FCD4 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		DE6D8F3F26100B290082FCD4 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		DEC993072602EC9600A42CF4 /* EventsShowCase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventsShowCase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC9930A2602EC9600A42CF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEC9930C2602EC9600A42CF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				DEC993102602EC9600A42CF4 /* Main.storyboard */,
 				DEC9934926065B1D00A42CF4 /* EventListCell.swift */,
+				DE6D8F3F26100B290082FCD4 /* EventView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 			files = (
 				DEC993402602F5AA00A42CF4 /* EventService.swift in Sources */,
 				DEC9933E2602F57B00A42CF4 /* RestAPIManager.swift in Sources */,
+				DE6D8F4026100B290082FCD4 /* EventView.swift in Sources */,
 				DE68F0002606B87000C5F479 /* EventViewModel.swift in Sources */,
 				DEC9930F2602EC9600A42CF4 /* EventListViewController.swift in Sources */,
 				DEC993152602EC9600A42CF4 /* EventsShowCase.xcdatamodeld in Sources */,

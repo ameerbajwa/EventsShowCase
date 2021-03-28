@@ -47,7 +47,7 @@ class EventListCell: UITableViewCell {
     
     func setUpEventNameLabel() {
         eventName.font = UIFont.boldSystemFont(ofSize: 18)
-        eventName.textColor = UIColor.systemBlue
+//        eventName.textColor = UIColor.systemBlue
         eventName.numberOfLines = 0
         
         addSubview(eventName)
