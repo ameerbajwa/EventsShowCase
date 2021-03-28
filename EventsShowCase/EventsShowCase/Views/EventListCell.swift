@@ -16,12 +16,15 @@ class EventListCell: UITableViewCell {
     var eventImageView = UIImageView()
     var eventFavoritedButton = UIButton()
     
+    var eventFavorited: Bool = false
+    
     var eventViewModel: EventViewModel! {
         didSet {
             eventName.text = eventViewModel.name
             eventLocation.text = eventViewModel.location
             eventTime.text = eventViewModel.formattedTime(eventTime: eventViewModel.time)
             eventImageView.image = UIImage(data: eventViewModel.setImage(stringUrl: eventViewModel.imageStringUrls[0])!)
+            eventFavorited = eventViewModel.favorited ?? false
         }
     }
     
@@ -55,7 +58,7 @@ class EventListCell: UITableViewCell {
         eventName.translatesAutoresizingMaskIntoConstraints = false
         eventName.leadingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: 20.0).isActive = true
         eventName.topAnchor.constraint(equalTo: topAnchor, constant: 20.0).isActive = true
-        eventName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20.0).isActive = true
+        eventName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50.0).isActive = true
     }
     
     func setUpEventLocationLabel() {
@@ -66,7 +69,7 @@ class EventListCell: UITableViewCell {
         eventLocation.translatesAutoresizingMaskIntoConstraints = false
         eventLocation.topAnchor.constraint(equalTo: eventName.bottomAnchor, constant: 10.0).isActive = true
         eventLocation.leadingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: 20.0).isActive = true
-        eventLocation.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20.0).isActive = true
+        eventLocation.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50.0).isActive = true
     }
     
     func setUpEventTimeLabel() {
@@ -78,16 +81,27 @@ class EventListCell: UITableViewCell {
         eventTime.translatesAutoresizingMaskIntoConstraints = false
         eventTime.topAnchor.constraint(equalTo: eventLocation.bottomAnchor, constant: 10.0).isActive = true
         eventTime.leadingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: 20.0).isActive = true
-        eventTime.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20.0).isActive = true
+        eventTime.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50.0).isActive = true
         eventTime.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20.0).isActive = true
     }
     
     func setUpEventFavoritedButton() {
-        if eventViewModel.favorited == true {
+        if eventFavorited {
+            print("event has been favorited")
             eventFavoritedButton.setImage(UIImage(named: "heartFilled"), for: .normal)
-            eventFavoritedButton.frame = CGRect(x: eventImageView.frame.width-15, y: -10, width: 30, height: 30)
+//            eventFavoritedButton.frame = CGRect(x: eventImageView.frame.width-15, y: -10, width: 30, height: 30)
             addSubview(eventFavoritedButton)
+            bringSubviewToFront(eventFavoritedButton)
+            eventFavoritedButton.translatesAutoresizingMaskIntoConstraints = false
+            eventFavoritedButton.centerXAnchor.constraint(equalTo: eventImageView.trailingAnchor).isActive = true
+            eventFavoritedButton.centerYAnchor.constraint(equalTo: eventImageView.topAnchor).isActive = true
+            eventFavoritedButton.widthAnchor.constraint(equalToConstant: 25.0).isActive = true
+            eventFavoritedButton.heightAnchor.constraint(equalToConstant: 25.0).isActive = true
+            
+        } else {
+            print("event has not been favorited")
         }
+
     }
     
     override func awakeFromNib() {

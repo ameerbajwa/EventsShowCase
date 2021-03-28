@@ -14,7 +14,8 @@ class EventListViewController: UIViewController {
     let eventService = EventService()
     private var eventsViewModel = [EventViewModel]()
     var filteredEventsViewModel = [EventViewModel]()
-    var selectedEventId: Int = 0
+    var selectedEventViewModel: EventViewModel?
+//    var selectedEventId: Int = 0
 //    var favoritedEvents: [NSManagedObject]?
     var favoritedEventsDict: [Int:Bool] = [:]
     var eventListTableView = UITableView()
@@ -82,12 +83,14 @@ class EventListViewController: UIViewController {
                 if favoritedEvents!.count > 0 {
                     self.eventsViewModel = self.eventsViewModel.map({ (eventViewModel: EventViewModel) -> EventViewModel in
                         var newEventViewModel = eventViewModel
-                        newEventViewModel.favorited = self.favoritedEventsDict[eventViewModel.id] ?? false
+                        newEventViewModel.favorited = self.favoritedEventsDict[newEventViewModel.id] ?? false
+                        print("\(newEventViewModel.name) has been favorited: \(newEventViewModel.favorited)")
                         return newEventViewModel
                     })
                 }
                 self.filteredEventsViewModel = self.eventsViewModel
                 DispatchQueue.main.async {
+                    print("eventListTableView reloaded")
                     self.eventListTableView.reloadData()
                 }
             }) { (error) in
@@ -102,7 +105,8 @@ class EventListViewController: UIViewController {
         if segue.identifier == "selectedEventSegue" {
             let vc = segue.destination as! EventViewController
             vc.favoritedEventsDict = favoritedEventsDict
-            vc.selectedEventId = selectedEventId
+            vc.eventViewModel = selectedEventViewModel
+//            vc.selectedEventId = selectedEventId
         }
     }
     
@@ -116,7 +120,7 @@ extension EventListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.filteredEventsViewModel.count ?? 0
+        return self.filteredEventsViewModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -132,7 +136,8 @@ extension EventListViewController: UITableViewDataSource {
 extension EventListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedEventId = filteredEventsViewModel[indexPath.row].id
+//        selectedEventId = filteredEventsViewModel[indexPath.row].id
+        selectedEventViewModel = filteredEventsViewModel[indexPath.row]
         self.performSegue(withIdentifier: "selectedEventSegue", sender: nil)
     }
 }

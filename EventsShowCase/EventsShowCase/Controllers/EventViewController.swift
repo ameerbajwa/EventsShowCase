@@ -12,34 +12,36 @@ class EventViewController: UIViewController {
     
     let eventService = EventService()
     var eventView = EventView()
-    var selectedEventId: Int?
+//    var selectedEventId: Int?
     var eventViewModel: EventViewModel?
     var favoritedEventsDict: [Int:Bool]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getEventAPICall { (eventviewmodel) in
-            DispatchQueue.main.async {
-                self.eventView = EventView.init(frame: CGRect(x: 0, y: self.view.safeAreaLayoutGuide.layoutFrame.origin.y, width: self.view.frame.size.width, height: self.view.frame.size.height))
-                self.eventView.eventViewModel = eventviewmodel
-                self.eventView.eventFavoritedButton.addTarget(self, action: #selector(self.eventFavoritedButtonPressed), for: .touchUpInside)
-                self.view.addSubview(self.eventView)
-            }
-        }
+//        DispatchQueue.main.async {
+        self.eventView = EventView.init(frame: CGRect(x: 0, y: self.view.safeAreaLayoutGuide.layoutFrame.origin.y + (self.navigationController?.navigationBar.frame.size.height)!, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        self.eventView.eventViewModel = eventViewModel
+        self.eventView.eventFavoritedButton.addTarget(self, action: #selector(self.eventFavoritedButtonPressed), for: .touchUpInside)
+        self.view.addSubview(self.eventView)
+//        }
+        
+//        getEventAPICall { (eventviewmodel) in
+//
+//        }
     }
     
-    func getEventAPICall(onSuccess: @escaping (EventViewModel) -> Void) {
-        if let id = selectedEventId {
-            eventService.getEvent(eventId: id, onSuccess: { (response) in
-                print("success")
-                self.eventViewModel = EventViewModel(event: response)
-                onSuccess(self.eventViewModel!)
-            }) { (error) in
-                print("error")
-            }
-        }
-    }
+//    func getEventAPICall(onSuccess: @escaping (EventViewModel) -> Void) {
+//        if let id = selectedEventId {
+//            eventService.getEvent(eventId: id, onSuccess: { (response) in
+//                print("success")
+//                self.eventViewModel = EventViewModel(event: response)
+//                onSuccess(self.eventViewModel!)
+//            }) { (error) in
+//                print("error")
+//            }
+//        }
+//    }
     
     @objc func eventFavoritedButtonPressed() {
         if var evm = self.eventViewModel {
@@ -52,7 +54,7 @@ class EventViewController: UIViewController {
                 }
             }
             
-            eventService.updateCoreData(id: evm.id, favorited: evm.favorited!)
+            eventService.updateCoreData(id: evm.id, favorited: evm.favorited!, favoritedEventsDict: favoritedEventsDict!)
         }
 
     }

@@ -34,7 +34,7 @@ class Venue: Decodable {
     var displayLocation: String
     var address: String
     var city: String
-    var state: String
+    var state: String?
     var country: String
 }
 

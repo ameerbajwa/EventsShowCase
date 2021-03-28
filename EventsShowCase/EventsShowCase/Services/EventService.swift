@@ -70,21 +70,43 @@ class EventService {
         }
     }
     
-    func updateCoreData(id: Int, favorited: Bool) {
+    func updateCoreData(id: Int, favorited: Bool, favoritedEventsDict: [Int: Bool]) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "EventFavorited", in: managedContext)!
-        let eventFavorited = NSManagedObject(entity: entity, insertInto: managedContext)
         
-        eventFavorited.setValue(id, forKeyPath: "id")
-        eventFavorited.setValue(favorited, forKeyPath: "favorited")
-        
-        do {
-            try managedContext.save()
-//                self.characters?.append(character)
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+        if favoritedEventsDict[id] == nil {
+            let entity = NSEntityDescription.entity(forEntityName: "EventFavorited", in: managedContext)!
+            let eventFavorited = NSManagedObject(entity: entity, insertInto: managedContext)
+            
+            eventFavorited.setValue(id, forKeyPath: "id")
+            eventFavorited.setValue(favorited, forKeyPath: "favorited")
+            
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        } else {
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "EventFavorited")
+            fetchRequest.predicate = NSPredicate(format: "id = %@", argumentArray: [id])
+            var favoritedEvents: [NSManagedObject]?
+            do {
+                favoritedEvents = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
+                if favoritedEvents?.count != 0 {
+                    favoritedEvents?[0].setValue(favorited, forKey: "favorited")
+                }
+            } catch {
+                print("Fetch Failed: \(error)")
+            }
+
+            do {
+                try managedContext.save()
+               }
+            catch {
+                print("Saving Core Data Failed: \(error)")
+            }
         }
+
     }
     
 }
