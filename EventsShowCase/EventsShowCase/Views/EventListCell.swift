@@ -24,7 +24,17 @@ class EventListCell: UITableViewCell {
             eventLocation.text = eventViewModel.location
             eventTime.text = eventViewModel.formattedTime(eventTime: eventViewModel.time)
             eventImageView.image = UIImage(data: eventViewModel.setImage(stringUrl: eventViewModel.imageStringUrls[0])!)
-            eventFavorited = eventViewModel.favorited ?? false
+            print("\(eventViewModel.name) has been favorited: \(eventViewModel.favorited)")
+            if let fav = eventViewModel.favorited {
+                if fav {
+                    eventFavoritedButton.setImage(UIImage(named: "heartFilled"), for: .normal)
+                } else {
+                    eventFavoritedButton.setImage(nil, for: .normal)
+                }
+            } else{
+                eventFavoritedButton.setImage(nil, for: .normal)
+            }
+//            eventFavorited = eventViewModel.favorited ?? false
         }
     }
     
@@ -86,21 +96,28 @@ class EventListCell: UITableViewCell {
     }
     
     func setUpEventFavoritedButton() {
-        if eventFavorited {
-            print("event has been favorited")
-            eventFavoritedButton.setImage(UIImage(named: "heartFilled"), for: .normal)
-//            eventFavoritedButton.frame = CGRect(x: eventImageView.frame.width-15, y: -10, width: 30, height: 30)
-            addSubview(eventFavoritedButton)
-            bringSubviewToFront(eventFavoritedButton)
-            eventFavoritedButton.translatesAutoresizingMaskIntoConstraints = false
-            eventFavoritedButton.centerXAnchor.constraint(equalTo: eventImageView.trailingAnchor).isActive = true
-            eventFavoritedButton.centerYAnchor.constraint(equalTo: eventImageView.topAnchor).isActive = true
-            eventFavoritedButton.widthAnchor.constraint(equalToConstant: 25.0).isActive = true
-            eventFavoritedButton.heightAnchor.constraint(equalToConstant: 25.0).isActive = true
-            
-        } else {
-            print("event has not been favorited")
-        }
+        addSubview(eventFavoritedButton)
+        bringSubviewToFront(eventFavoritedButton)
+        eventFavoritedButton.translatesAutoresizingMaskIntoConstraints = false
+        eventFavoritedButton.centerXAnchor.constraint(equalTo: eventImageView.trailingAnchor).isActive = true
+        eventFavoritedButton.centerYAnchor.constraint(equalTo: eventImageView.topAnchor).isActive = true
+        eventFavoritedButton.widthAnchor.constraint(equalToConstant: 25.0).isActive = true
+        eventFavoritedButton.heightAnchor.constraint(equalToConstant: 25.0).isActive = true
+        
+//        if eventFavorited {
+//            print("event has been favorited")
+////            eventFavoritedButton.frame = CGRect(x: eventImageView.frame.width-15, y: -10, width: 30, height: 30)
+//            addSubview(eventFavoritedButton)
+//            bringSubviewToFront(eventFavoritedButton)
+//            eventFavoritedButton.translatesAutoresizingMaskIntoConstraints = false
+//            eventFavoritedButton.centerXAnchor.constraint(equalTo: eventImageView.trailingAnchor).isActive = true
+//            eventFavoritedButton.centerYAnchor.constraint(equalTo: eventImageView.topAnchor).isActive = true
+//            eventFavoritedButton.widthAnchor.constraint(equalToConstant: 25.0).isActive = true
+//            eventFavoritedButton.heightAnchor.constraint(equalToConstant: 25.0).isActive = true
+//
+//        } else {
+//            print("event has not been favorited")
+//        }
 
     }
     

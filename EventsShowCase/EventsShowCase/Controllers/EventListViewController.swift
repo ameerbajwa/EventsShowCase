@@ -15,6 +15,7 @@ class EventListViewController: UIViewController {
     private var eventsViewModel = [EventViewModel]()
     var filteredEventsViewModel = [EventViewModel]()
     var selectedEventViewModel: EventViewModel?
+    var dataIsLoaded: Bool = false
 //    var selectedEventId: Int = 0
 //    var favoritedEvents: [NSManagedObject]?
     var favoritedEventsDict: [Int:Bool] = [:]
@@ -32,6 +33,7 @@ class EventListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        dataIsLoaded = false
         favoritedEventsDict = [:]
         filteredEventsViewModel = []
         eventsViewModel = []
@@ -84,11 +86,12 @@ class EventListViewController: UIViewController {
                     self.eventsViewModel = self.eventsViewModel.map({ (eventViewModel: EventViewModel) -> EventViewModel in
                         var newEventViewModel = eventViewModel
                         newEventViewModel.favorited = self.favoritedEventsDict[newEventViewModel.id] ?? false
-                        print("\(newEventViewModel.name) has been favorited: \(newEventViewModel.favorited)")
+//                        print("\(newEventViewModel.name) has been favorited: \(newEventViewModel.favorited)")
                         return newEventViewModel
                     })
                 }
                 self.filteredEventsViewModel = self.eventsViewModel
+                self.dataIsLoaded = true
                 DispatchQueue.main.async {
                     print("eventListTableView reloaded")
                     self.eventListTableView.reloadData()
@@ -116,7 +119,7 @@ class EventListViewController: UIViewController {
 
 extension EventListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return dataIsLoaded ? 1 : 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -126,7 +129,7 @@ extension EventListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventListCell", for: indexPath) as? EventListCell
         cell?.eventViewModel = filteredEventsViewModel[indexPath.row]
-        cell?.accessoryType = .disclosureIndicator
+//        cell?.accessoryType = .disclosureIndicator
         return cell!
     }
 }
