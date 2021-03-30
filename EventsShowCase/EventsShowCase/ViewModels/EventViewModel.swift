@@ -20,6 +20,7 @@ struct EventViewModel {
     var time: String
     var imageStringUrls: [String]
     var imagesOfData: Data?
+    var releventEventStrings: [String]
 
     var favorited: Bool?
     
@@ -41,6 +42,10 @@ struct EventViewModel {
         }
         self.imagesOfData = nil
         self.favorited = false
+        self.releventEventStrings = []
+        for taxonomy in event.taxonomies {
+            self.releventEventStrings.append(taxonomy.name)
+        }
     }
     
     mutating func formattedTime(eventTime: String) -> String {

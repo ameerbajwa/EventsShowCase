@@ -25,23 +25,7 @@ class EventViewController: UIViewController {
         self.eventView.eventFavoritedButton.addTarget(self, action: #selector(self.eventFavoritedButtonPressed), for: .touchUpInside)
         self.view.addSubview(self.eventView)
 //        }
-        
-//        getEventAPICall { (eventviewmodel) in
-//
-//        }
     }
-    
-//    func getEventAPICall(onSuccess: @escaping (EventViewModel) -> Void) {
-//        if let id = selectedEventId {
-//            eventService.getEvent(eventId: id, onSuccess: { (response) in
-//                print("success")
-//                self.eventViewModel = EventViewModel(event: response)
-//                onSuccess(self.eventViewModel!)
-//            }) { (error) in
-//                print("error")
-//            }
-//        }
-//    }
     
     @objc func eventFavoritedButtonPressed() {
         if var evm = self.eventViewModel {

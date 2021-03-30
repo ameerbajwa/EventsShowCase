@@ -150,7 +150,8 @@ extension EventListViewController: UITableViewDelegate {
 extension EventListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredEventsViewModel = eventsViewModel.filter { (event) -> Bool in
-            return event.name.lowercased().contains(searchText.lowercased())
+            return event.releventEventStrings.contains(searchText.lowercased())
+            // return event.name.lowercased().contains(searchText.lowercased())
         }
         if searchText == "" {
             filteredEventsViewModel = eventsViewModel
